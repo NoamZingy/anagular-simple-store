@@ -1,0 +1,27 @@
+<div class="col-lg-12">
+    <mat-card class="card-product">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{ product.title | uppercase }}</mat-card-title>
+            <mat-card-subtitle>{{ product.type | lowercase}}</mat-card-subtitle>
+            <mat-card-subtitle><s>{{ product.price }}</s></mat-card-subtitle>
+            <mat-card-subtitle>{{ product.price | discount:0.5 }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="imagePath" alt="No Image">
+        <mat-card-content>
+            <p>
+                {{ product.description }}
+
+            </p>
+            <app-rating [rating]="product.rating"></app-rating>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>{{ product.rating }}</button>
+            <button (click)="deleteProduct(product.title)" mat-button>Delete</button>
+
+        </mat-card-actions>
+    </mat-card>
+    <app-comment-list [comments]="commentsService.getComments(product.title)"></app-comment-list>
+
+    <app-add-comment (sendComment)="addComment($event)"></app-add-comment>
+</div>
